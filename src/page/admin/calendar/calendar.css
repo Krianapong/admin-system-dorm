@@ -1,0 +1,68 @@
+@import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+.rbc-calendar {
+   margin: 10px;
+}
+.calender-main {
+    width: 90%;
+    height: 80vh;
+    margin-bottom: 50px;
+ }
+ .save-button {
+   background-color: #33ff57;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ .save-button:hover {
+   background-color: #2ecc51;
+ }
+
+ .close-button {
+   background-color: #ff5733;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ .close-button:hover {
+   background-color: #ff331a; 
+ }
+
+ .delete-button{
+   background-color: #ff7433;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ .delete-button:hover {
+   background-color: #ff7433;
+ }
+
+ 
+ .modal-container {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+}
+
+.modal-title {
+  font-size: 16px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.modal-text {
+  font-size: 16px;
+}
+

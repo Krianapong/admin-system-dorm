@@ -1,0 +1,83 @@
+.main-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: scroll;
+  margin-bottom: 50px;
+}
+
+
+.card-img-top {
+  height: 400px;
+  object-fit: cover;
+}
+
+.add-new-button {
+  background-color: #33ff57;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-news-button:hover {
+  background-color: #33ff57;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.previous-botton{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px #888;
+  border: 1px solid orange; 
+}
+
+.next-button {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px #888;
+  border: 1px solid orange; 
+}
+
+.number-button {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border: 1px solid orange; 
+  cursor: pointer;
+  box-shadow: 2px 2px 5px #888;
+}
+
+.number-button.active {
+  background-color: orange;
+  color: white;
+}
+
+.add-main {
+  display: flex;
+  justify-content: flex-end; 
+}
+
+.add-button {
+  background-color: rgb(30, 114, 34);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5%;
+}
+
+.add-button:hover {
+  background-color: #00ff37; 
+}

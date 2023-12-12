@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
+
+html,
+body,
+#root,
+.app,
+.content {  
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+  overflow: hidden;
+}
+
+.content_body{
+  background: #ffffff;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+.content_user{
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+.app {
+  display: flex;
+  position: relative;
+}
+.menu-bars {
+  text-decoration: none;
+  color: #000;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+
+ /* sidebar */
+ .main-sidebar {
+  background: #ffffff;
+}
+
+.sidebar{
+  height: 100%;
+}
+.sidebar-main{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.sidebar-main-a{
+  flex: 1;
+  margin-Bottom: 32px;
+}
+.sidebar-icon{
+  margin: 10px 0 20px 20px; 
+}
+.sidebar-box{
+  display: flex;
+  justify-content: space-between;
+  align-Items: center;
+  margin-left: 15px;
+}
+.sidebar-menu{
+    padding: 0 24px;
+    margin-Bottom: 8px;
+    margin-Top: 32px;
+}
+
+.btn-signup {
+  background-color: #FE922E;
+  color: #fff; 
+  font-size: 18px; 
+  padding: 10px 20px; 
+  border: none; 
+  cursor: pointer; 
+  text-align: center; 
+  text-decoration: none; 
+  border-radius: 5px; 
+  transition: background-color 0.3s ease; 
+}
+
+.btn-signup:hover {
+  background-color: #FE922E; 
+  color: #fff; 
+}
+
+.back {
+  height: 100vh;
+  position: relative;
+}
+.back img {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  object-fit: cover;
+}
+.back::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(17, 40, 72, 0.629);
+  z-index: -1;
+}
+.back .container {
+  color: #fff;
+  padding: 120px 0;
+}
+.back h1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+.mb {
+  margin-bottom: 80px;
+}

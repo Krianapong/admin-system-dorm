@@ -1,0 +1,63 @@
+@import "../../styles/responsive.css";
+
+.topBox h1 {
+  margin-bottom: 20px;
+}
+
+.topBox h1.xxl {
+  font-size: 24px;
+}
+
+.topBox .list .listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.topBox .list .listItem .user {
+  display: flex;
+  gap: 20px;
+}
+
+.topBox .list .listItem .user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.topBox .list .listItem .user img.xxl {
+  display: none;
+}
+
+.topBox .list .listItem .user img.lg {
+  display: block;
+}
+
+.topBox .list .listItem .user .userTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.topBox .list .listItem .user .userTexts .username {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.topBox .list .listItem .user .userTexts .email {
+  font-size: 12px;
+}
+
+.topBox .list .listItem .user .userTexts .email.xxl {
+  display: none;
+}
+
+.topBox .list .listItem .user .userTexts .email.lg {
+  display: block;
+}
+
+.topBox .list .listItem .amount {
+  font-weight: 500;
+}

@@ -1,0 +1,67 @@
+@import "../../styles/variables.css";
+
+.add {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.724);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add .modal {
+  padding: 50px;
+  border-radius: 10px;
+  background-color: var(--main-bg);
+  position: relative;
+}
+
+.add .modal h1 {
+  margin-bottom: 40px;
+  font-size: 24px;
+  color: var(--soft-color);
+}
+
+.add .modal .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.add .modal form {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+  justify-content: space-between;
+}
+
+.add .modal form .item {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add .modal form .item label {
+  font-size: 14px;
+}
+
+.add .modal form .item input {
+  padding: 10px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: 1px solid var(--soft-color);
+  border-radius: 3px;
+}
+
+.add .modal form button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
