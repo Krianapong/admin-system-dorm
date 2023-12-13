@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Sidebar,
   Menu,
@@ -89,7 +89,7 @@ const SideBar = () => {
 
               </SubMenu>
 
-              <Link to={"/room"} className="menu-bars">
+              <Link to={"/rooms"} className="menu-bars">
                 <MenuItem icon={<VillaRoundedIcon />}>ผังห้องพัก</MenuItem>
               </Link>
 

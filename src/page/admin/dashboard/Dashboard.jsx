@@ -1,4 +1,10 @@
 import React from 'react';
+import Topbox from '../../../components/topBox/TopBox';
+import ChartBox from '../../../components/chartBox/ChartBox';
+import PieChartBox from '../../../components/pieCartBox/PieChartBox';
+import BigChartBox from '../../../components/bigChartBox/BigChartBox';
+import BarChartBox from '../../../components/barChartBox/BarChartBox';
+
 import "./dashboard.css";
 import {
   barChartBoxRevenue,
@@ -6,45 +12,42 @@ import {
   chartBoxConversion,
   chartBoxProduct,
   chartBoxRevenue,
-  chartBoxUser,
+  chartBoxUser
 } from "../../../data"
 const Dashboard = () => {
   return (
     <div className="home">
       <div className="box box1">
-        {/* <TopBox /> */}
-        1s
+        <Topbox />
       </div>
       <div className="box box2">
-        {/* <ChartBox {...chartBoxUser} /> */}
-        2
+        <ChartBox {...chartBoxUser} />
       </div>
       <div className="box box3">
-        {/* <ChartBox {...chartBoxProduct} /> */}
-        3
+        <ChartBox {...chartBoxProduct} />
       </div>
       <div className="box box4">
-        {/* <PieChartBox /> */}
-        4
+        <PieChartBox />
+        
       </div>
       <div className="box box5">
-        {/* <ChartBox {...chartBoxConversion} /> */}
-        5
+        <ChartBox {...chartBoxConversion} />
+        
       </div>
       <div className="box box6">
-        {/* <ChartBox {...chartBoxRevenue} /> */}
-        6
+        <ChartBox {...chartBoxRevenue} />
+        
       </div>
       <div className="box box7">
-        {/* <BigChartBox /> */}
+        <BigChartBox />
         7
       </div>
       <div className="box box8">
-        {/* <BarChartBox {...barChartBoxVisit} /> */}
+        <BarChartBox {...barChartBoxVisit} />
         8
       </div>
       <div className="box box9">
-        {/* <BarChartBox {...barChartBoxRevenue} /> */}
+        <BarChartBox {...barChartBoxRevenue} />
         9
       </div>
     </div>

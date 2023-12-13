@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Container, Typography, Paper, Avatar, CssBaseline } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { auth, firestore } from '../firebase';

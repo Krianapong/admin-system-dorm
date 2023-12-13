@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./detail.css";
 import DataTableAC from "../../../components/dataTableroom/DataTableRoom";
 import Add from "../../../components/add/Add";
