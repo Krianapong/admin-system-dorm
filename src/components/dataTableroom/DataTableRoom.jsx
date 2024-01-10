@@ -30,6 +30,7 @@ const DataTableRoom = (props) => {
   const [smallModalDetail, setSmallModalDetail] = useState(null);
   const [documents, setDocument] = useState([]);
   const [selectoption, setSelectOption] = useState(null);
+  const [selectedDorm, setSelectedDorm] = useState(null);
 
   const handleFetchDataRoom = async (status, roomNumber) => {
     try {
@@ -81,6 +82,18 @@ const DataTableRoom = (props) => {
 
     fetchDataType();
   }, []);
+
+  useEffect(() => {
+    const fetchDataType = async () => {
+      const collectionRef = firestore.collection("zone_dorm");
+      const querySnapshot = await collectionRef.get();
+      const documentDrom = querySnapshot.docs.map((doc) => doc.id);
+      setDocument(documentDrom);
+    };
+
+    fetchDataType();
+  }, []);
+
 
   const handleDelete = async () => {
     try {
@@ -147,6 +160,7 @@ const DataTableRoom = (props) => {
     setShowAssign(false);
     setShowOccupied(false);
     setSelectOption(null);
+    setSelectedDorm(null);
   };
 
   const handleShow = () => {
@@ -216,17 +230,85 @@ const DataTableRoom = (props) => {
   };
 
   function CustomToolbar() {
+    const [showAddDormModal, setShowAddDormModal] = useState(false);
+    const [dormName, setDormName] = useState(""); // Add state for dorm information
+    const [selectedModel, setSelectedModel] = useState("");
+
+    const handleAddDorm = () => {
+      // Perform actions related to "/zone_dorm/document"
+      // For example, you can open a modal to add dorm information.
+      setShowAddDormModal(true);
+    };
+
+    const handleCloseAddDormModal = () => {
+      setShowAddDormModal(false);
+    };
+
+    const handleAddRoom = async () => {
+      
+    };
+
+    const saveDormToFirestore = async () => {
+      try {
+        await firestore.collection("/zone_dorm/").doc(dormName).set({});
+
+        firestore.collection("/zone_dorm/").doc(dormName).collection("rooms");
+       
+        console.log(`Dorm "${dormName}" added to Firestore successfully!`);
+      } catch (error) {
+        console.error("Error adding dorm to Firestore:", error);
+      } finally {
+        handleCloseAddDormModal();
+      }
+    };
+
+
     return (
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <GridToolbarQuickFilter />
         </div>
         <div>
+          <Button
+            variant="text"
+            startIcon={<AddIcon />}
+            onClick={handleAddDorm}
+          >
+            ADD DORM
+          </Button>
           <Button variant="text" startIcon={<AddIcon />} onClick={handleShow}>
-            ADD
+            ADD ROOMS
           </Button>
           <GridToolbarExport />
         </div>
+
+        <Modal show={showAddDormModal} onHide={handleCloseAddDormModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Dorm</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formDormName">
+                <Form.Label>Dorm Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter dorm name"
+                  value={dormName}
+                  onChange={(e) => setDormName(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseAddDormModal}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={saveDormToFirestore}>
+              Save Dorm
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <Modal
           show={showModal}
           onHide={handleClose}
@@ -238,6 +320,20 @@ const DataTableRoom = (props) => {
           </Modal.Header>
           <Modal.Body className="modal-body">
             <Form>
+            <Form.Label className="form-label">Drom</Form.Label>
+            <Form.Control
+              as="select"
+              name="TypeRooms"
+              id="TypeRooms"
+              value={selectedDorm}
+              onChange={(e) => setSelectedDorm(e.target.value)}
+            >
+              {documents.map((documentDrom) => (
+                <option key={documentDrom} value={documentDrom}>
+                  {documentDrom}
+                </option>
+              ))}
+            </Form.Control>
               <Form.Group>
                 <Form.Label className="form-label">Room Number</Form.Label>
                 <Form.Control

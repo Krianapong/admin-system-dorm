@@ -13,7 +13,7 @@ const columns = [
     renderCell: (params) => {
       return (
         <img
-          src={`https://firebasestorage.googleapis.com/v0/b/hopak2-7320e.appspot.com/o/profiles_image%2F${params.row.img}.jpg?alt=media`}
+          src={`https://firebasestorage.googleapis.com/v0/b/hopak-8af20.appspot.com/o/profiles_image%2F${params.row.img}.jpg?alt=media`}
           alt="profiileAvatar"
           style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
@@ -84,7 +84,9 @@ const Detail = () => {
                   id: memberDataArray.length + 1,
                   img: owner,
                   roomNumber: room,
-                  name: doc.data().name,
+                  name: `${doc.data().firstName} ${doc.data().lastName}`, 
+                  firstName: doc.data().firstName,
+                  lastName: doc.data().lastName,
                   email: doc.data().email,
                   phoneNumber: doc.data().phone,
                   dateIn : DateIn,

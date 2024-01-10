@@ -16,6 +16,10 @@ import {
 } from "react-router-dom";
 import News from "./page/admin/news/New";
 import Room from "./page/admin/room/Room";
+import Paybill from "./page/admin/paybill/Paybill";
+import Notifybill from "./page/admin/notifybill/Notifybill";
+import Water from "./page/admin/water/Water";
+import Electricity from "./page/admin/electricity/Electricity";
 
 function App() {
   return (
@@ -26,12 +30,14 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/news" element={<News />} />
-          <Route path="/calender" element={<Calender />} />
+          <Route path="/calendar" element={<Calender />} />
           <Route path="/personnel" element={<Personnel />} />
           <Route path="/detail" element={<Detail />} />
           <Route path="/rooms" element={<Room />} />
-          {/* <Route path="/water" element={<Water />} /> */}
-          {/* <Route path="/electricity" element={<Electricity />} /> */}
+          <Route path="/water" element={<Water />} />
+          <Route path="/electricity" element={<Electricity />} />
+          <Route path="/paybill" element={<Paybill />} />
+          <Route path="/notifybill" element={<Notifybill />} />
 
         </Routes>
       </Router>

@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from '@mui/icons-material/Send';
 import "./dataTable.css";
 
-const DataTableAC = (props) => {
+const DataTableBI = (props) => {
 
   const actionColumn = {
     field: "action",
@@ -56,4 +56,4 @@ const DataTableAC = (props) => {
   );
 };
 
-export default DataTableAC;
+export default DataTableBI;

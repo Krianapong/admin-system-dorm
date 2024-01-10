@@ -19,7 +19,7 @@ const columns = [
   {
     field: "typeRoom",
     type: "string",
-    headerName: "ชนิดห้องพัก",
+    headerName: "ชนิดห้องพัก",   
     width: 300,
   },
 ];
