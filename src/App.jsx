@@ -20,6 +20,7 @@ import Notifybill from "./page/admin/notifybill/Notifybill";
 import Water from "./page/admin/water/Water";
 import Electricity from "./page/admin/electricity/Electricity";
 import { Box, CssBaseline } from "@mui/material";
+import HeaderBar from "./layout/HeaderBar";
 
 function App() {
   return (
@@ -36,7 +37,8 @@ function App() {
         <Router>
           <SideBar />
           <main className="content">
-            {/* <HeaderBar /> */}
+            <HeaderBar />
+            
             <div className="content_body">
               <Box m="20px">
                 <Routes>
