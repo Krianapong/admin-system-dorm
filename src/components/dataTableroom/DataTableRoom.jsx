@@ -188,20 +188,20 @@ const DataTableRoom = (props) => {
     const location = document.getElementById("Location").value;
     const price = document.getElementById("Price").value;
     const imageFile = document.getElementById("Image").files[0];
-  
+
     if (!typeName || !location || !price || !imageFile) {
       console.error("All fields are required.");
       return;
     }
-  
+
     try {
       // Upload the image file to Firebase Storage
       const storageRef = storage.ref().child(`${imageFile.name}`);
       const snapshot = await storageRef.put(imageFile);
-  
+
       // Get the reference to the uploaded image file
       const imageUrl = await snapshot.ref.getDownloadURL();
-  
+
       // Save the image file path or reference in Firestore
       const newTypeData = {
         name: typeName,
@@ -209,9 +209,9 @@ const DataTableRoom = (props) => {
         price,
         imgPath: snapshot.ref.fullPath, // Save the path/reference instead of URL
       };
-  
+
       await firestore.collection("typerooms").doc(typeName).set(newTypeData);
-  
+
       console.log(`Room type ${typeName} added successfully.`);
       setShowAddTypeModal(false);
     } catch (error) {
@@ -457,7 +457,9 @@ const DataTableRoom = (props) => {
           <Modal.Body>
             <Form>
               <Form.Group controlId="profile owner">
-                <Form.Label>Name : {UserData.firstName} {UserData.lastName}</Form.Label>
+                <Form.Label>
+                  Name : {UserData.firstName} {UserData.lastName}
+                </Form.Label>
                 <br />
                 <Form.Label>Phone Number : {UserData.phone}</Form.Label>
                 <br />

@@ -1,6 +1,6 @@
 import React from "react";
 import DataTable from "../../../components/dataTable/DataTable.jsx";
-import { rooms  } from "../../../data.ts";
+import { rooms } from "../../../data.ts";
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -27,7 +27,10 @@ const columns = [
     headerName: "รูป",
     width: 150,
     renderCell: (params) => {
-      return React.createElement("img", { src: params.row.img || "/noavatar.png", alt: "" });
+      return React.createElement("img", {
+        src: params.row.img || "/noavatar.png",
+        alt: "",
+      });
     },
   },
   {
@@ -45,14 +48,14 @@ const columns = [
 ];
 
 const Repair = () => {
-    return (
-      <div>
-        <div className="header-content">
-          <h2>เเจ้งซ่อม</h2>
-        </div>
-        <DataTable columns={columns} rows={rooms} />
+  return (
+    <div>
+      <div className="header-content">
+        <h2>เเจ้งซ่อม</h2>
       </div>
-    );
-  };
-  
-  export default Repair;
+      <DataTable columns={columns} rows={rooms} />
+    </div>
+  );
+};
+
+export default Repair;
