@@ -138,7 +138,7 @@ const DataTableRoom = (props) => {
         setShowSmallModal(false);
       }, 2000);
     } catch (error) {
-      console.log("error add new room : ", error);
+      console.log("error add new rooms : ", error);
     }
   };
 
