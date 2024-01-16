@@ -8,6 +8,8 @@ import Personnel from "./page/admin/personnel/Personnel";
 // import Water from "./page/admin/water/Water";
 // import Electricity from "./page/admin/electricity/Electricity";
 import Detail from "./page/admin/detail/Detail";
+import Repair from "./page/admin/repair/Repair";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,6 +23,8 @@ import Water from "./page/admin/water/Water";
 import Electricity from "./page/admin/electricity/Electricity";
 import { Box, CssBaseline } from "@mui/material";
 import HeaderBar from "./layout/HeaderBar";
+import Clean from "./page/admin/clean/Clean";
+import Security from "./page/admin/security/Security";
 
 function App() {
   return (
@@ -53,6 +57,10 @@ function App() {
                   <Route path="/electricity" element={<Electricity />} />
                   <Route path="/paybill" element={<Paybill />} />
                   <Route path="/notifybill" element={<Notifybill />} />
+                  <Route path="/repair" element={<Repair />} />
+                  <Route path="/clean" element={<Clean />} />
+                  <Route path="/security" element={<Security />} />
+
                 </Routes>
               </Box>
             </div>

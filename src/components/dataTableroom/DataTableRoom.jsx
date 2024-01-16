@@ -454,15 +454,15 @@ const DataTableRoom = (props) => {
           <Modal.Body>
             <Form>
               <Form.Group controlId="profile owner">
-                <Form.Label>Profile Name : {UserData.name}</Form.Label>
+                <Form.Label>Name : {UserData.firstName} {UserData.lastName}</Form.Label>
                 <br />
-                <Form.Label>Profile Phone Number : {UserData.phone}</Form.Label>
+                <Form.Label>Phone Number : {UserData.phone}</Form.Label>
                 <br />
-                <Form.Label>Profile Email : {UserData.email}</Form.Label>
+                <Form.Label>Email : {UserData.email}</Form.Label>
                 <br />
-                <Form.Label>Profile DateIn : {roomData.datein}</Form.Label>
+                <Form.Label>DateIn : {roomData.datein}</Form.Label>
                 <br />
-                <Form.Label>Profile DateOut : {roomData.dateout}</Form.Label>
+                <Form.Label>DateOut : {roomData.dateout}</Form.Label>
               </Form.Group>
             </Form>
           </Modal.Body>
