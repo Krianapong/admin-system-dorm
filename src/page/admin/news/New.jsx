@@ -295,7 +295,7 @@ function News() {
               <Form.Label>Type</Form.Label>
               <Form.Control
                 as="select"
-                value={newNews.selectedType || ""}
+                value={selectedType || ""}
                 onChange={(e) => handleTypeSelection(e.target.value)}
               >
                 <option value="">Select Type</option>
