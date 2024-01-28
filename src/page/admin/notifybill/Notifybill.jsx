@@ -57,6 +57,10 @@ const Notifybill = () => {
                   email: profileData?.email || "", // Set email to empty string if not found
                   phone: profileData?.phone || "", // Set phone to empty string if not found
                   status: roomData.status,
+                  water: roomData.water || "", // Fetch water data from room
+                  waterCurrent: roomData.waterCurrent || "", // Fetch waterCurrent data from room
+                  electric: roomData.electric || "", // Fetch waterCurrent data from room
+                  electricCurrent: roomData.electricCurrent || "", // Fetch waterCurrent data from room
                 };
               } else {
                 return {
@@ -65,6 +69,10 @@ const Notifybill = () => {
                   email: "",
                   phone: "",
                   status: roomData.status,
+                  water: roomData.water || "", // Fetch water data from room
+                  waterCurrent: roomData.waterCurrent || "", // Fetch waterCurrent data from room
+                  electric: roomData.electric || "", // Fetch waterCurrent data from room
+                  electricCurrent: roomData.electricCurrent || "", // Fetch waterCurrent data from room
                 };
               }
             })

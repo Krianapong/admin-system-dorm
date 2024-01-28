@@ -118,7 +118,7 @@ const Clean = () => {
   return (
     <div>
       <div className="header-content">
-        <h2>แจ้งซ่อม</h2>
+        <h2>ทำความสะอาด</h2>
       </div>
       <DataTable columns={columns} rows={data} />
     </div>

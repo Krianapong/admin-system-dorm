@@ -39,8 +39,7 @@ const columns = [
     headerName: "เบอร์โทร",
     type: "string",
     width: 200,
-    renderCell: (params) =>
-      `${params.row.ownerDetails.phone}`,
+    renderCell: (params) => `${params.row.ownerDetails.phone}`,
   },
   {
     field: "status",
@@ -58,46 +57,76 @@ const Repair = () => {
       try {
         const roomsCollection = firestore.collection("rooms");
         const roomsQuerySnapshot = await roomsCollection.get();
-    
+
         const roomsData = [];
         for (const roomDoc of roomsQuerySnapshot.docs) {
           const room = roomDoc.data();
-          const ownerUID = room.owner;
-    
-          // Fetch owner profile details
-          const profileDoc = await firestore.collection("profiles").doc(ownerUID).get();
-          const ownerDetails = profileDoc.data();
-    
-          // Fetch service details by specifying the document path
-          const serviceDoc = await firestore.collection(`Services/Repair/${ownerUID}`).doc(ownerUID).get();
-          const serviceData = serviceDoc.data();
-    
-          // Combine room data with owner details and service details
-          roomsData.push({
-            id: roomDoc.id,
-            numroom: room.numroom,
-            owner: ownerUID,
-            ownerDetails: {
-              firstName: ownerDetails.firstName,
-              lastName: ownerDetails.lastName,
-              phone: ownerDetails.phone
-            },
-            totalAmount: serviceData.totalAmount || 0,
-            selectedRoom: serviceData.selectedRoom || '', 
-            img: room.img,
-            status: serviceData.status || ''
-            // Add other fields from rooms collection as needed
-          });
+
+          // Check if owner field exists and is valid
+          if (room.owner) {
+            const ownerUID = room.owner;
+
+            // Fetch owner profile details
+            const profileDoc = await firestore
+              .collection("profiles")
+              .doc(ownerUID)
+              .get();
+            const ownerDetails = profileDoc.data();
+
+            // Fetch additional data from /Services/Repairt/{ownerUID}
+            const repairQuerySnapshot = await firestore
+              .collection("Services")
+              .doc("Repairt")
+              .collection(ownerUID)
+              .where("selectedRoom", "==", roomDoc.id)
+              .get();
+
+            let totalAmount = "";
+            let status = "";
+
+            // Check if repair data exists for the selected room
+            if (!repairQuerySnapshot.empty) {
+              const repairDoc = repairQuerySnapshot.docs[0];
+              const repairData = repairDoc.data();
+              totalAmount = repairData.totalAmount;
+              status = repairData.status;
+            }
+
+            // Combine room data with owner details, totalAmount, and status
+            console.log("Total:", totalAmount);
+            console.log("Status:", status);
+
+            roomsData.push({
+              id: roomDoc.id,
+              numroom: room.numroom,
+              owner: ownerUID,
+              ownerDetails: {
+                firstName: ownerDetails.firstName,
+                lastName: ownerDetails.lastName,
+                phone: ownerDetails.phone,
+                avatar: ownerDetails.avatar,
+              },
+              totalAmount: totalAmount,
+              status: status,
+              img: room.img,
+              // Add other fields from rooms collection as needed
+            });
+          } else {
+            console.error(
+              "Room document does not have valid owner field:",
+              roomDoc.id
+            );
+          }
         }
-    
+
         setData(roomsData);
       } catch (error) {
         console.error("Error fetching data from Firestore:", error);
       }
-    };    
+    };
 
     fetchData();
-  }, []); // Run this effect only once (on mount)
+  }, []);
 
   return (
     <div>
