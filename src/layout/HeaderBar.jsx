@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-const HeaderBar = ({ setIsAuthenticated , setIsAdmin }) => {
+
+const HeaderBar = ({ setIsAuthenticated, setIsAdmin }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -15,24 +17,34 @@ const HeaderBar = ({ setIsAuthenticated , setIsAdmin }) => {
   };
 
   const handleSignOut = async () => {
-    auth.signOut().then(() => {
-      alert('Sign Out');
-      setIsAuthenticated(false);
-      setIsAdmin(false);
-      navigate('/');
-    }).catch((error) => {
-      console.log('error sign out : ',error);
-    });
+    auth
+      .signOut()
+      .then(() => {
+        alert("Sign Out");
+        setIsAuthenticated(false);
+        setIsAdmin(false);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("error sign out: ", error);
+      });
   };
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2}>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      p={2}
+      borderBottom="1px solid rgba(128, 128, 128, 0.5)"
+    >
       {/* empty box  */}
-      <Box display="flex"   >
-      </Box>
+      <Box display="flex"></Box>
 
       {/* icons */}
-      <Box display="flex">
+      <Box
+        display="flex"
+        textDecoration="underline"  
+      >
         <IconButton>
           <PersonOutlinedIcon onClick={handleMenu} />
           <Menu
@@ -54,7 +66,7 @@ const HeaderBar = ({ setIsAuthenticated , setIsAdmin }) => {
               <MenuItem onClick={handleClose}>Profile</MenuItem>
             </Link>
             <Link to="/chat" className="menu-bars">
-              <MenuItem onClick={handleClose}>Chat</MenuItem>
+              <MenuItem>Chat</MenuItem>
             </Link>
             <Link to="/" className="menu-bars">
               <MenuItem onClick={handleSignOut}>Log out</MenuItem>
