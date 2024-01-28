@@ -6,7 +6,7 @@ import Add from "../../../components/add/Add";
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
-  { field: "owner", headerName: "เจ้าของ", width: 220 },
+  { field: "owner", headerName: "ชื่อ - นามสกุล", width: 220 },
   { field: "email", headerName: "อีเมล", width: 220 },
   { field: "phone", headerName: "โทรศัพท์", width: 220 },
   { field: "status", headerName: "สถานะ", width: 220 },

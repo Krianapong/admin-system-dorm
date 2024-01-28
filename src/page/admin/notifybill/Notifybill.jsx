@@ -9,7 +9,7 @@ const columns = [
   {
     field: "owner",
     type: "string",
-    headerName: "เจ้าของ",
+    headerName: "ชื่อ - นามสกุล",
     width: 150,
   },
   {
