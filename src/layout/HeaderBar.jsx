@@ -50,13 +50,13 @@ const HeaderBar = ({ setIsAuthenticated , setIsAdmin }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <Link to="/admin/profile" className="menu-bars">
+            <Link to="/profile" className="menu-bars">
               <MenuItem onClick={handleClose}>Profile</MenuItem>
             </Link>
-            <Link to="/admin/chat" className="menu-bars">
+            <Link to="/chat" className="menu-bars">
               <MenuItem onClick={handleClose}>Chat</MenuItem>
             </Link>
-            <Link to="#" className="menu-bars">
+            <Link to="/" className="menu-bars">
               <MenuItem onClick={handleSignOut}>Log out</MenuItem>
             </Link>
           </Menu>

@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
-import './new.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import { firestore, storage } from '../../../firebase';
-
+import React, { useState, useEffect } from "react";
+import "./new.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import { firestore, storage } from "../../../firebase";
 
 const fetchNewsFromFirestore = async () => {
   try {
@@ -35,8 +34,9 @@ const updateNewsInFirestore = async (id, updatedData) => {
     await firestore.collection("news").doc(id).update({
       title: updatedData.title,
       description: updatedData.description,
-      image: updatedData.image, // Update the image field with the new URL
+      image: updatedData.image,
       date: updatedData.date,
+      type: updatedData.type, // Include the type field in the update
     });
     console.log(`News with ID ${id} updated in Firestore`);
   } catch (error) {
@@ -78,6 +78,7 @@ function News() {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const newsPage = firebaseNews.slice(startIndex, endIndex);
+  const [selectedType, setSelectedType] = useState(null);
 
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -117,6 +118,7 @@ function News() {
         description: newNews.description,
         image: imageUrl,
         date: newNews.date,
+        type: selectedType, // Include selected type in news data
       };
 
       await addNewsToFirestore(newsData);
@@ -175,7 +177,16 @@ function News() {
   const handleEditClick = (news) => {
     setNewNews(news);
     setEditing(true);
+    setSelectedType(news.type);
     setShowModal(true);
+  };
+
+  const handleTypeSelection = (type) => {
+    setSelectedType(type);
+    setNewNews({
+      ...newNews,
+      type: type, // Update the type in newNews state
+    });
   };
 
   return (
@@ -195,7 +206,10 @@ function News() {
                   alt={`News ${index}`}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{news.title}</h5>
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <h5 className="card-title mb-0">{news.title}</h5>
+                    <p className="card-text mb-0">{news.type}</p>
+                  </div>
                   <p className="card-text">{news.description}</p>
                   <p className="card-text">{news.date}</p>
                   <div className="btn-group">
@@ -228,8 +242,9 @@ function News() {
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}
-              className={`number-button ${currentPage === index + 1 ? "active" : ""
-                }`}
+              className={`number-button ${
+                currentPage === index + 1 ? "active" : ""
+              }`}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
@@ -243,7 +258,7 @@ function News() {
             Next
           </button>
         </div>
-        
+
         <div className="add-main">
           <button className="add-button" onClick={handleShow}>
             Add News
@@ -276,6 +291,18 @@ function News() {
                 onChange={handleChange}
               />
             </Form.Group>
+            <Form.Group controlId="type">
+              <Form.Label>Type</Form.Label>
+              <Form.Control
+                as="select"
+                value={newNews.selectedType || ""}
+                onChange={(e) => handleTypeSelection(e.target.value)}
+              >
+                <option value="">Select Type</option>
+                <option value="ข่าวด่วน">ข่าวด่วน</option>
+                <option value="กิจกรรม">กิจกรรม</option>
+              </Form.Control>
+            </Form.Group>
             <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
@@ -291,7 +318,6 @@ function News() {
                 />
               )}
             </Form.Group>
-
             <Form.Group controlId="date">
               <Form.Label>Date</Form.Label>
               <Form.Control
@@ -304,7 +330,11 @@ function News() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <button variant="secondary" onClick={handleClose} className='close-button'>
+          <button
+            variant="secondary"
+            onClick={handleClose}
+            className="close-button"
+          >
             Close
           </button>
           <button
@@ -314,7 +344,7 @@ function News() {
                 ? () => handleEditNews(newNews.id, newNews)
                 : handleAddNews
             }
-            className='add-new-button'
+            className="add-new-button"
           >
             {editing ? "Save Changes" : "Add News"}
           </button>

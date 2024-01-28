@@ -1,0 +1,71 @@
+/* profile.css */
+
+.main-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.img-profile {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.profile-detail {
+  margin-bottom: 20px;
+}
+
+.input-edit {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.profile1 {
+  font-weight: bold;
+}
+
+.footer-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+/* Loading Spinner Style */
+.dna-wrapper {
+  text-align: center;
+}
+
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

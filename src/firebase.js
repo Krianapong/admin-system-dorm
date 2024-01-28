@@ -10,8 +10,8 @@ const firebaseConfig = {
   projectId: "hopak-8af20",
   storageBucket: "hopak-8af20.appspot.com",
   messagingSenderId: "940936256349",
-  appId: "1:940936256349:web:8ec07e1976e26e62c926b4",
-  measurementId: "G-PZEW03FQTX"
+  appId: "1:940936256349:web:bb817ff8eb20e9a7c926b4",
+  measurementId: "G-FCD1YNV5SQ"
 };
 
 const db = firebase.initializeApp(firebaseConfig);

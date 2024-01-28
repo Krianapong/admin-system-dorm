@@ -46,6 +46,11 @@ const SignIn = () => {
           Sign In
         </Typography>
         <form onSubmit={handleSubmit} style={{ width: '100%', marginTop: 1 }}>
+          {error && (
+            <Typography variant="body2" color="error" sx={{ mb: 2 }}>
+              {error}
+            </Typography>
+          )}
           <TextField
             margin="normal"
             required
@@ -73,11 +78,6 @@ const SignIn = () => {
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
-          {error && (
-            <Typography variant="body2" color="error" sx={{ mt: 2 }}>
-              {error}
-            </Typography>
-          )}
         </form>
       </Paper>
     </Container>

@@ -14,11 +14,6 @@ const columns = [
     type: "string",
     headerName: "ชื่อ - นามสกุล",
     width: 200,
-    renderCell: (params) => {
-      return params.row.owner
-        ? `${params.row.firstName} ${params.rowlastName}`
-        : "";
-    },
   },
   {
     field: "totalAmount",
@@ -63,19 +58,10 @@ const Repair = () => {
           return { id: roomDoc.id, ...roomDoc.data() };
         });
 
-        const profilesCollection = firestore.collection("profiles");
-        const profilesQuerySnapshot = await profilesCollection.get();
-        const profilesData = profilesQuerySnapshot.docs.map((profileDoc) => {
-          return { id: profileDoc.id, ...profileDoc.data() };
-        });
-
         const combinedData = roomsData.map((rooms) => {
-          const ownerProfile = profilesData.find(
-            (profiles) => profiles.firstName === rooms.owner
-          );
           return {
             ...rooms,
-            ownerDetails: ownerProfile || {},
+            ownerDetails: rooms.ownerDetails || {}, // Assuming ownerDetails is already available in rooms
           };
         });
 

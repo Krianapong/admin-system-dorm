@@ -1,39 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "../../../components/dataTable/DataTable.jsx";
-import { rooms  } from "../../../data.ts";
+import { firestore } from "../../../firebase.js";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 100 },
   {
-    field: "roomNumber",
+    field: "firstName",
     type: "string",
-    headerName: "เลขห้อง",
+    headerName: "ชื่อ",
     width: 150,
   },
   {
-    field: "name",
-    type: "string",
-    headerName: "ชื่อ - นามสกุล ",
-    width: 200,
-  },
-  {
-    field: "details",
-    type: "string",
-    headerName: "รายละเอียด",
-    width: 200,
-  },
-  {
-    field: "img",
+    field: "imageUrl",
     headerName: "รูป",
     width: 150,
     renderCell: (params) => {
-      return React.createElement("img", { src: params.row.img || "/noavatar.png", alt: "" });
+      return React.createElement("img", {
+        src: params.row.imageUrl || "/noavatar.png",
+        alt: "",
+      });
     },
   },
   {
-    field: "phoneNumber",
+    field: "phone",
     headerName: "เบอร์โทร",
     type: "string",
+    width: 200,
+  },
+  {
+    field: "selectedRoom",
+    type: "string",
+    headerName: "ห้องที่เลือก",
     width: 200,
   },
   {
@@ -42,18 +38,42 @@ const columns = [
     width: 200,
     type: "string",
   },
+  {
+    field: "totalAmount",
+    type: "string",
+    headerName: "ราคา",
+    width: 200,
+  },
 ];
 
-const Clean = () => {
-  
-    return (
-      <div>
-          <div className="header-content">
-            <h2>ทำความสะอาด</h2>
-          </div>
-        <DataTable columns={columns} rows={rooms} />
+const HousewifeServices = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const servicesCollection = firestore.collection("Housewife");
+        const servicesQuerySnapshot = await servicesCollection.get();
+        const servicesData = servicesQuerySnapshot.docs.map((serviceDoc) => {
+          return { id: serviceDoc.id, ...serviceDoc.data() };
+        });
+        setData(servicesData);
+      } catch (error) {
+        console.error("Error fetching data from Firestore:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Run this effect only once (on mount)
+
+  return (
+    <div>
+      <div className="header-content">
+        <h2>บริการคุณแม่บ้าน</h2>
       </div>
-    );
-  };
-  
-  export default Clean;
+      <DataTable columns={columns} rows={data} />
+    </div>
+  );
+};
+
+export default HousewifeServices;

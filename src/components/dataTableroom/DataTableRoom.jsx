@@ -3,6 +3,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import PageviewIcon from "@mui/icons-material/Pageview";
 import CheckIcon from "@mui/icons-material/Check";
+import EditIcon from "@mui/icons-material/Edit";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
@@ -104,6 +106,8 @@ const DataTableRoom = (props) => {
 
   const handleAddRoom = async () => {
     const roomNumber = document.getElementById("title").value;
+    const apiWaterCost = document.getElementById("waterCost").value;
+    const apiElectricCost = document.getElementById("electricCost").value;
 
     if (!roomNumber) {
       console.error("Room number is required.");
@@ -122,6 +126,8 @@ const DataTableRoom = (props) => {
       dateout: null,
       type: document.getElementById("TypeRooms").value,
       status: document.getElementById("Status").value,
+      apiWaterCost,
+      apiElectricCost,
     };
 
     try {
@@ -195,9 +201,12 @@ const DataTableRoom = (props) => {
     }
 
     try {
-      // Upload the image file to Firebase Storage
-      const storageRef = storage.ref().child(`${imageFile.name}`);
-      const snapshot = await storageRef.put(imageFile);
+      // Create a reference to the "types_image" folder with the type name as a subfolder
+      const storageRef = storage.ref().child(`types_image/${typeName}`);
+
+      // Upload the image file to the specified subfolder
+      const imageRef = storageRef.child(`${typeName}`);
+      const snapshot = await imageRef.put(imageFile);
 
       // Get the reference to the uploaded image file
       const imageUrl = await snapshot.ref.getDownloadURL();
@@ -321,6 +330,26 @@ const DataTableRoom = (props) => {
                     </option>
                   ))}
                 </Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label className="form-label">API Water Cost</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="waterCost"
+                  id="waterCost"
+                  className="form-control"
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label className="form-label">
+                  API Electric Cost
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="electricCost"
+                  id="electricCost"
+                  className="form-control"
+                />
               </Form.Group>
             </Form>
           </Modal.Body>
