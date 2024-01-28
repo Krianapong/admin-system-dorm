@@ -4,18 +4,32 @@ import { firestore } from "../../../firebase.js";
 
 const columns = [
   {
-    field: "firstName",
+    field: "id",
     type: "string",
-    headerName: "ชื่อ",
+    headerName: "เลขห้อง",
     width: 150,
   },
   {
-    field: "imageUrl",
+    field: "owner",
+    type: "string",
+    headerName: "ชื่อ - นามสกุล",
+    width: 200,
+    renderCell: (params) =>
+      `${params.row.ownerDetails.firstName} ${params.row.ownerDetails.lastName}`,
+  },
+  {
+    field: "totalAmount",
+    type: "string",
+    headerName: "ราคา",
+    width: 200,
+  },
+  {
+    field: "avatar",
     headerName: "รูป",
     width: 150,
     renderCell: (params) => {
       return React.createElement("img", {
-        src: params.row.imageUrl || "/noavatar.png",
+        src: params.row.ownerDetails.avatar || "/noavatar.png",
         alt: "",
       });
     },
@@ -25,12 +39,7 @@ const columns = [
     headerName: "เบอร์โทร",
     type: "string",
     width: 200,
-  },
-  {
-    field: "selectedRoom",
-    type: "string",
-    headerName: "ห้องที่เลือก",
-    width: 200,
+    renderCell: (params) => `${params.row.ownerDetails.phone}`,
   },
   {
     field: "status",
@@ -38,26 +47,66 @@ const columns = [
     width: 200,
     type: "string",
   },
-  {
-    field: "totalAmount",
-    type: "string",
-    headerName: "ราคา",
-    width: 200,
-  },
 ];
 
-const HousewifeServices = () => {
+const Clean = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const servicesCollection = firestore.collection("Housewife");
-        const servicesQuerySnapshot = await servicesCollection.get();
-        const servicesData = servicesQuerySnapshot.docs.map((serviceDoc) => {
-          return { id: serviceDoc.id, ...serviceDoc.data() };
-        });
-        setData(servicesData);
+        const roomsCollection = firestore.collection("rooms");
+        const roomsQuerySnapshot = await roomsCollection.get();
+
+        const roomsData = [];
+        for (const roomDoc of roomsQuerySnapshot.docs) {
+          const room = roomDoc.data();
+
+          // Check if owner field exists and is valid
+          if (room.owner) {
+            const ownerUID = room.owner;
+
+            // Fetch owner profile details
+            const profileDoc = await firestore
+              .collection("profiles")
+              .doc(ownerUID)
+              .get();
+            const ownerDetails = profileDoc.data();
+
+            // Fetch additional data from /Services/Repair/{ownerUID}
+            const repairDoc = await firestore
+              .collection("Services")
+              .doc("Housewife")
+              .collection(ownerUID)
+              .doc(roomDoc.id)
+              .get();
+            const repairData = repairDoc.data();
+
+            // Combine room data with owner details and repair data
+            roomsData.push({
+              id: roomDoc.id,
+              numroom: room.numroom,
+              owner: ownerUID,
+              ownerDetails: {
+                firstName: ownerDetails.firstName,
+                lastName: ownerDetails.lastName,
+                phone: ownerDetails.phone,
+                avatar: ownerDetails.avatar,
+              },
+              totalAmount: repairData ? repairData.totalAmount : "", // Get totalAmount field
+              status: repairData ? repairData.status : "", // Get status field
+              img: room.img,
+              // Add other fields from rooms collection as needed
+            });
+          } else {
+            console.error(
+              "Room document does not have valid owner field:",
+              roomDoc.id
+            );
+          }
+        }
+
+        setData(roomsData);
       } catch (error) {
         console.error("Error fetching data from Firestore:", error);
       }
@@ -69,11 +118,11 @@ const HousewifeServices = () => {
   return (
     <div>
       <div className="header-content">
-        <h2>บริการคุณแม่บ้าน</h2>
+        <h2>แจ้งซ่อม</h2>
       </div>
       <DataTable columns={columns} rows={data} />
     </div>
   );
 };
 
-export default HousewifeServices;
+export default Clean;
