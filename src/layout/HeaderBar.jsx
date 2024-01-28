@@ -78,4 +78,4 @@ const HeaderBar = ({ setIsAuthenticated, setIsAdmin }) => {
   );
 };
 
-export default HeaderBar;
+export default HeaderBar; 
