@@ -35,7 +35,7 @@ const DataTableBI = (props) => {
       const typePrice = params.row.typePrice; // Get the email address from the row data
       const waters = params.row.waterCurrent - params.row.water; // Calculate water cost
       const powers = params.row.electricCurrent - params.row.electric; // Calculate power cost
-      const amount = typePrice + waters + powers; // Calculate total amount
+      const amount = parseInt(typePrice) + waters + powers; // Calculate total amount and parse to integer
 
       return (
         <div className="action">
